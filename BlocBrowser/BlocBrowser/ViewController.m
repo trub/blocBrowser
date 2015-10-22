@@ -34,13 +34,10 @@
     self.textField.delegate = self;
     
     
-    
-    
-    NSString *urlString = @"http://espn.com";
-    NSURL *url = [NSURL URLWithString: urlString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
-    
+//    NSString *urlString = @"http://espn.com";
+//    NSURL *url = [NSURL URLWithString: urlString];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [self.webView loadRequest:request];
     
     [mainView addSubview:self.webView];
     [mainView addSubview:self.textField];
@@ -66,6 +63,23 @@
     self.webView.frame = CGRectMake(0, CGRectGetMaxY(self.textField.frame), width, browserHeight);
     
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    NSString *URLString = textField.text;
+    
+    NSURL *URL = [NSURL URLWithString:URLString];
+    
+    if (URL) {
+        NSURLRequest *request = [NSURLRequest requestWithURL: URL];
+        [self.webView loadRequest:request];
+    }
+    
+    return NO;
+    
+}
+
 
 
 @end
