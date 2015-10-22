@@ -81,6 +81,13 @@
     [mainView addSubview:self.stopButton];
     [mainView addSubview:self.reloadButton];
     
+    for (UIView *viewToAdd in @[self.webView, self.textField, self.backButton, self.forwardButton, self.stopButton, self.reloadButton]){
+        [mainView addSubview:viewToAdd];
+    }
+    
+ 
+    
+    
     self.view = mainView;
 }
 
