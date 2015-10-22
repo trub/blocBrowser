@@ -71,6 +71,10 @@
     
     NSURL *URL = [NSURL URLWithString:URLString];
     
+    if (!URL.scheme) {
+        URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", URLString]];
+    }
+    
     if (URL) {
         NSURLRequest *request = [NSURLRequest requestWithURL: URL];
         [self.webView loadRequest:request];
