@@ -14,6 +14,13 @@
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) UITextField *textField;
 
+@property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIButton *forwardButton;
+@property (nonatomic, strong) UIButton *stopButton;
+@property (nonatomic, strong) UIButton *reloadButton;
+
+
+
 @end
 
 @implementation ViewController
@@ -35,6 +42,31 @@
     self.textField.backgroundColor = [UIColor colorWithWhite:220/255.0f alpha:1];
     self.textField.delegate = self;
     
+    self.backButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.backButton setEnabled: NO];
+    
+    self.forwardButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.forwardButton setEnabled: NO];
+    
+    self.stopButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.stopButton setEnabled: NO];
+    
+    self.reloadButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.reloadButton setEnabled: NO];
+    
+    [self.backButton setTitle:NSLocalizedString(@"Back",@"Back command") forState:UIControlStateNormal];
+    [self.backButton addTarget:self.webView action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.forwardButton setTitle:NSLocalizedString(@"Back",@"Back command") forState:UIControlStateNormal];
+    [self.forwardButton addTarget:self.webView action:@selector(goForward) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.stopButton setTitle:NSLocalizedString(@"Back",@"Back command") forState:UIControlStateNormal];
+    [self.stopButton addTarget:self.webView action:@selector(stopLoading) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.reloadButton setTitle:NSLocalizedString(@"Back",@"Back command") forState:UIControlStateNormal];
+    [self.reloadButton addTarget:self.webView action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
 //    NSString *urlString = @"http://espn.com";
 //    NSURL *url = [NSURL URLWithString: urlString];
@@ -43,6 +75,12 @@
     
     [mainView addSubview:self.webView];
     [mainView addSubview:self.textField];
+    
+    [mainView addSubview:self.backButton];
+    [mainView addSubview:self.forwardButton];
+    [mainView addSubview:self.stopButton];
+    [mainView addSubview:self.reloadButton];
+    
     self.view = mainView;
 }
 
