@@ -57,13 +57,13 @@
     [self.backButton setTitle:NSLocalizedString(@"Back",@"Back command") forState:UIControlStateNormal];
     [self.backButton addTarget:self.webView action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.forwardButton setTitle:NSLocalizedString(@"Back",@"Back command") forState:UIControlStateNormal];
+    [self.forwardButton setTitle:NSLocalizedString(@"Forward",@"Forward command") forState:UIControlStateNormal];
     [self.forwardButton addTarget:self.webView action:@selector(goForward) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.stopButton setTitle:NSLocalizedString(@"Back",@"Back command") forState:UIControlStateNormal];
+    [self.stopButton setTitle:NSLocalizedString(@"Stop",@"Stop command") forState:UIControlStateNormal];
     [self.stopButton addTarget:self.webView action:@selector(stopLoading) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.reloadButton setTitle:NSLocalizedString(@"Back",@"Back command") forState:UIControlStateNormal];
+    [self.reloadButton setTitle:NSLocalizedString(@"Reload",@"Reload command") forState:UIControlStateNormal];
     [self.reloadButton addTarget:self.webView action:@selector(reload) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -103,11 +103,22 @@
     //make the webview fill the main view
 //    self.webView.frame = self.view.frame;
 
+    //calculat some dimensions
     static const CGFloat itemHeight = 50;
     CGFloat width = CGRectGetWidth(self.view.bounds);
-    CGFloat browserHeight = CGRectGetHeight(self.view.bounds) - itemHeight;
+    CGFloat browserHeight = CGRectGetHeight(self.view.bounds) - itemHeight -itemHeight;
+    CGFloat buttonWidth = CGRectGetWidth(self.view.bounds) / 4;
+    
+    //assign the frames
     self.textField.frame = CGRectMake(0, 0, width, itemHeight);
     self.webView.frame = CGRectMake(0, CGRectGetMaxY(self.textField.frame), width, browserHeight);
+    
+    CGFloat currentButtonX = 0;
+    
+    for (UIButton *thisButton in @[self.backButton, self.forwardButton, self.stopButton, self.reloadButton]){
+        thisButton.frame = CGRectMake(currentButtonX, CGRectGetMaxY(self.webView.frame), buttonWidth, itemHeight);
+        currentButtonX += buttonWidth;
+    }
     
 }
 
