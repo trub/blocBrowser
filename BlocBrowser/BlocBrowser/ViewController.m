@@ -146,6 +146,19 @@
 
 #pragma mark-WKNavigationDelegate
 
+
+-(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    
+    [self updateButtonsAndTitle];
+    
+}
+
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    
+    [self updateButtonsAndTitle];
+}
+
+
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *) navigation withError:(NSError *)error {
     [self webView:webView didFailNavigation:navigation withError:error];
 }
@@ -162,6 +175,14 @@
         
         [self presentViewController:alert animated:YES completion:nil];
     }
+    
+    [self updateButtonsAndTitle];
+    
+}
+
+#pragma mark-miscellaneous
+
+-(void) updateButtonsAndTitle {
     
 }
 
