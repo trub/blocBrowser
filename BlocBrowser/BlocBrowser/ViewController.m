@@ -18,6 +18,8 @@
 
 @implementation ViewController
 
+#pragma mark - UIViewController
+
 - (void)loadView{
     UIView * mainView = [UIView new];
     
@@ -64,6 +66,8 @@
     
 }
 
+#pragma mark-UITextFieldDelegate
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
@@ -83,6 +87,9 @@
     return NO;
     
 }
+
+#pragma mark-WKNavigationDelegate
+
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *) navigation withError:(NSError *)error {
     [self webView:webView didFailNavigation:navigation withError:error];
 }
