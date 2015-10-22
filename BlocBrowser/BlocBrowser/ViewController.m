@@ -184,8 +184,14 @@
 
 -(void) updateButtonsAndTitle {
     
+    NSString *webpageTitle = [self.webView.title copy];
+    if ([webpageTitle length]) {
+        self.title = webpageTitle;
+    } else {
+        self.title = self.webView.URL.absoluteString;
+    }
+    
 }
-
 
 
 
