@@ -13,11 +13,15 @@
 
 @property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, strong) UITextField *textField;
-
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *forwardButton;
 @property (nonatomic, strong) UIButton *stopButton;
 @property (nonatomic, strong) UIButton *reloadButton;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
+
+
+
 
 
 
@@ -95,6 +99,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -191,8 +198,20 @@
         self.title = self.webView.URL.absoluteString;
     }
     
+    
+    if (self.webView.isLoading) {
+        [self.activityIndicator startAnimating];
+    } else {
+        [self.activityIndicator stopAnimating];
+
+    }
+    
+    
+    
     self.backButton.enabled = [self.webView canGoBack];
     self.forwardButton.enabled = [self.webView canGoForward];
+    self.backButton.enabled = self.webView.isLoading;
+    self.forwardButton.enabled = !self.webView.isLoading;
     
 }
 
