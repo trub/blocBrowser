@@ -191,6 +191,9 @@
         self.title = self.webView.URL.absoluteString;
     }
     
+    self.backButton.enabled = [self.webView canGoBack];
+    self.forwardButton.enabled = [self.webView canGoForward];
+    
 }
 
 
